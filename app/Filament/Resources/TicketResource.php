@@ -31,12 +31,10 @@ class TicketResource extends Resource
                     ->placeholder('Title'),
                 Forms\Components\Textarea::make('description')->rows(4)->nullable(),
 
-                Forms\Components\Select::make('assigned_to')->relationship('assignedTo', 'name'),
-                Forms\Components\Select::make('status')->options(Ticket::STATUS),
-                Forms\Components\Select::make('priority')->options(Ticket::PRIORITY),
+                Forms\Components\Select::make('assigned_to')->relationship('assignedTo', 'name')->required(),
+                Forms\Components\Select::make('status')->options(Ticket::STATUS)->required()->in(Ticket::STATUS),
+                Forms\Components\Select::make('priority')->options(Ticket::PRIORITY)->required()->in(Ticket::PRIORITY),
                 Forms\Components\Textarea::make('comment')->rows(4)->nullable(),
-
-
             ]);
     }
 
@@ -44,13 +42,19 @@ class TicketResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('title')->description(fn(Ticket $record)=>\Livewire\str()->limit($record->description,50))->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('assignedBy.name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('assignedTo.name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('status')->badge()->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('priority')->badge()->searchable()->sortable(),
+                Tables\Columns\TextInputColumn::make('comment')
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -62,7 +66,7 @@ class TicketResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\CategoriesRelationManager::class
         ];
     }
 
