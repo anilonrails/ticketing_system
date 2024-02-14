@@ -44,8 +44,20 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function roles() : BelongsToMany
+    public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    public function hasPermission(string $permission): bool
+    {
+        $currentPermissions = [];
+
+        foreach ($this->roles as $role) {
+            foreach ($role->permissions as $permission) {
+                $currentPermissions[] = $permission;
+            }
+        }
+        return in_array($permission, $currentPermissions);
     }
 }
