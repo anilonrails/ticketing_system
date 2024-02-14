@@ -52,12 +52,13 @@ class User extends Authenticatable
     public function hasPermission(string $permission): bool
     {
         $currentPermissions = [];
-
         foreach ($this->roles as $role) {
-            foreach ($role->permissions as $permission) {
-                $currentPermissions[] = $permission;
+            foreach ($role->permissions as $role_permission) {
+
+                $currentPermissions[] = $role_permission->name;
             }
         }
+
         return in_array($permission, $currentPermissions);
     }
 }

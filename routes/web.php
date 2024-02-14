@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    dd(\App\Models\User::find(2)->hasPermission('user_create'));
     return view('welcome');
 });
