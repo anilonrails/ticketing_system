@@ -75,6 +75,21 @@ class PermissionSeeder extends Seeder
             [
                 'name'=>'category_access',
             ],
+            [
+                'name'=>'role_create',
+            ],
+            [
+                'name'=>'role_edit',
+            ],
+            [
+                'name'=>'role_delete',
+            ],
+            [
+                'name'=>'role_show',
+            ],
+            [
+                'name'=>'role_access',
+            ]
 
         ];
 
