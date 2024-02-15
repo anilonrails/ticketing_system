@@ -2,13 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\Ticket;
+use App\Observers\TicketObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
-
+use Filament\Notifications\Livewire\DatabaseNotifications;
 class EventServiceProvider extends ServiceProvider
 {
+
+
     /**
      * The event to listener mappings for the application.
      *
@@ -25,7 +28,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Ticket::observe(TicketObserver::class);
+        DatabaseNotifications::pollingInterval(null);
     }
 
     /**

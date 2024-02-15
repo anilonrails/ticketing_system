@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\TicketResource\Pages;
 
 use App\Filament\Resources\TicketResource;
+use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\TicketsOverviewChart;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -15,5 +17,10 @@ class ListTickets extends ListRecords
         return [
             Actions\CreateAction::make(),
         ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [StatsOverview::class, TicketsOverviewChart::class];
     }
 }
