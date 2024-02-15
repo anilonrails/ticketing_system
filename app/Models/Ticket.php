@@ -11,7 +11,7 @@ class Ticket extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'status', 'priority', 'comment', 'assigned_to', 'assigned_by'];
+    protected $fillable = ['title', 'description', 'status', 'priority', 'comment', 'assigned_to', 'assigned_by', 'attachment'];
 
     const PRIORITY = [
         'Low' => 'Low',

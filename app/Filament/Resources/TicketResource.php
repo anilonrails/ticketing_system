@@ -42,6 +42,7 @@ class TicketResource extends Resource
                 Forms\Components\Select::make('status')->options(Ticket::STATUS)->required()->in(Ticket::STATUS),
                 Forms\Components\Select::make('priority')->options(Ticket::PRIORITY)->required()->in(Ticket::PRIORITY),
                 Forms\Components\Textarea::make('comment')->rows(4)->nullable(),
+                Forms\Components\FileUpload::make('attachment')
             ]);
     }
 
