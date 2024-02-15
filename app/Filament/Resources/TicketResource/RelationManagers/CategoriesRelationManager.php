@@ -36,7 +36,7 @@ class CategoriesRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\AttachAction::make()->preloadRecordSelect(),
+                Tables\Actions\AttachAction::make()->recordSelectOptionsQuery(fn(Builder $query)=>$query->where('is_active',1))->preloadRecordSelect(),
             ])
             ->actions([
                 //Tables\Actions\EditAction::make(),

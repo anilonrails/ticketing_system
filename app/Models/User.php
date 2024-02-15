@@ -61,4 +61,9 @@ class User extends Authenticatable
 
         return in_array($permission, $currentPermissions);
     }
+
+    public function hasRole(string $role)
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
 }
